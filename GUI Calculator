@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.font as font
 
 root = Tk()
+fir = 0
 def myButtonClick(number):
     inputScreen.insert(len(inputScreen.get()), number)
 
