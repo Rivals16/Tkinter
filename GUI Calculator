@@ -1,0 +1,148 @@
+from tkinter import *
+import tkinter.font as font
+
+root = Tk()
+def myButtonClick(number):
+    inputScreen.insert(len(inputScreen.get()), number)
+
+
+def clearButton():
+    global fir
+    fir = 0
+    inputScreen.delete(0, 'end')
+
+
+def addButton():
+    global fir
+    if fir != 0:
+
+        answer = fir + float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    else:
+        answer = -fir + float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    print(answer)
+
+
+def divideButton():
+    global fir
+    if fir != 0:
+
+        answer = fir / float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    else:
+        answer = -fir + float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    print(answer)
+
+
+def multiplyButton():
+    global fir
+    if fir != 0:
+
+        answer = fir * float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    else:
+        answer = -fir + float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    print(answer)
+
+
+def subButton():
+    global fir
+    if fir != 0:
+
+        answer = fir - float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    else:
+        answer = -fir + float(inputScreen.get())
+
+        inputScreen.insert(0, str(answer))
+        inputScreen.delete(0, 'end')
+        fir = answer
+    print(answer)
+
+
+def floatButton():
+    inputScreen.insert(len(inputScreen.get()), '.')
+
+
+root.title('Calculator')
+myFont = font.Font(size=15)
+inputScreen = Entry(text="Hello", width=70, borderwidth=4)
+
+button1 = Button(root, text="1", padx=40, pady=40, command=lambda: myButtonClick(1))
+button2 = Button(root, text="2", padx=40, pady=40, command=lambda: myButtonClick(2))
+button3 = Button(root, text="3", padx=40, pady=40, command=lambda: myButtonClick(3))
+button4 = Button(root, text="4", padx=40, pady=40, command=lambda: myButtonClick(4))
+button5 = Button(root, text="5", padx=40, pady=40, command=lambda: myButtonClick(5))
+button6 = Button(root, text="6", padx=40, pady=40, command=lambda: myButtonClick(6))
+button7 = Button(root, text="7", padx=40, pady=40, command=lambda: myButtonClick(7))
+button8 = Button(root, text="8", padx=40, pady=40, command=lambda: myButtonClick(8))
+button9 = Button(root, text="9", padx=40, pady=40, command=lambda: myButtonClick(9))
+button0 = Button(root, text="0", padx=40, pady=40, command=lambda: myButtonClick(0))
+
+buttonClear = Button(root, text="Clear", padx=23, pady=40, command=lambda: clearButton())
+buttonFloat = Button(root, text=".", padx=47, pady=47, command=lambda: floatButton())
+
+buttonAdd = Button(root, text="+", padx=40, pady=40, command=lambda: addButton())
+buttonDivide = Button(root, text="/", padx=40, pady=40, command=lambda: divideButton())
+buttonMultiply = Button(root, text="*", padx=40, pady=40, command=lambda: multiplyButton())
+buttonSubtract = Button(root, text="-", padx=40, pady=40, command=lambda: subButton())
+
+button1['font'] = myFont
+button2['font'] = myFont
+button3['font'] = myFont
+button4['font'] = myFont
+button5['font'] = myFont
+button6['font'] = myFont
+button7['font'] = myFont
+button8['font'] = myFont
+button9['font'] = myFont
+button0['font'] = myFont
+buttonClear['font'] = myFont
+buttonAdd['font'] = myFont
+buttonDivide['font'] = myFont
+buttonMultiply['font'] = myFont
+buttonSubtract['font'] = myFont
+
+inputScreen.grid(row=0, column=0, columnspan=4, ipady=2)
+button1.grid(row=1, column=0, ipadx=2)
+button2.grid(row=1, column=1, ipadx=2)
+button3.grid(row=1, column=2, ipadx=2)
+button4.grid(row=2, column=0, ipadx=2)
+button5.grid(row=2, column=1, ipadx=2)
+button6.grid(row=2, column=2, ipadx=2)
+button7.grid(row=3, column=0, ipadx=2)
+button8.grid(row=3, column=1, ipadx=2)
+button9.grid(row=3, column=2, ipadx=2)
+button0.grid(row=4, column=1, ipadx=2)
+buttonClear.grid(row=4, column=0, ipadx=2)
+buttonFloat.grid(row=4, column=2, ipadx=2)
+buttonAdd.grid(row=1, column=3, ipadx=2)
+buttonDivide.grid(row=2, column=3, ipadx=2)
+buttonMultiply.grid(row=3, column=3, ipadx=2)
+buttonSubtract.grid(row=4, column=3, ipadx=2)
+
+root.mainloop()
