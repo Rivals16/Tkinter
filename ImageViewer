@@ -1,0 +1,56 @@
+from tkinter import *
+import time
+from PIL import ImageTk, Image
+import os
+
+root = Tk()
+root.title("Image Viewer")
+root.iconbitmap('gow.ico')
+
+
+def resizeImage(image):
+    return image.resize((round(im.size[0] * 0.2), round(im.size[1] * 0.2)))
+
+
+def prevImage(current):
+    global currentImage
+    if currentImage > 0:
+        currentImage -= 1
+        mainImage(currentImage)
+
+
+def nextImage(current):
+    global currentImage
+    global maximumImage
+    if currentImage < maximumImage:
+        currentImage += 1
+        mainImage(currentImage)
+
+
+def mainImage(index):
+    myImage2 = ImageTk.PhotoImage(resizeImage(Image.open(directory + images[index])))
+    mainImageWindow.configure(image=myImage2)
+    mainImageWindow.image = myImage2
+
+
+directory = 'C:/Users/Rivals16/Desktop/Testing/'
+os.chdir(directory)
+images = os.listdir()
+
+currentImage = 0
+maximumImage = len(images) - 1
+currentImagePath = directory + images[currentImage]
+
+im = Image.open(currentImagePath)
+resized_im = resizeImage(im)
+
+myImage = ImageTk.PhotoImage(resized_im)
+mainImageWindow = Label(root, image=myImage)
+mainImageWindow.grid(row=0, column=0, columnspan=2)
+
+prevButton = Button(root, text='<<', command=lambda: prevImage(currentImage))
+nextButton = Button(root, text='>>', command=lambda: nextImage(currentImage))
+prevButton.grid(row=1, column=0)
+nextButton.grid(row=1, column=1)
+
+root.mainloop()
