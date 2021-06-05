@@ -17,6 +17,7 @@ def prevImage(current):
     if currentImage > 0:
         currentImage -= 1
         mainImage(currentImage)
+        updateStatus()
 
 
 def nextImage(current):
@@ -25,12 +26,20 @@ def nextImage(current):
     if currentImage < maximumImage:
         currentImage += 1
         mainImage(currentImage)
+        updateStatus()
 
 
 def mainImage(index):
     myImage2 = ImageTk.PhotoImage(resizeImage(Image.open(directory + images[index])))
     mainImageWindow.configure(image=myImage2)
     mainImageWindow.image = myImage2
+
+
+def updateStatus():
+    global currentImage
+    updatedText = 'Image ' + '{}'.format(currentImage + 1) + ' of ' + str(len(images))
+    statusBar.configure(text=updatedText)
+    statusBar.text = updatedText
 
 
 directory = 'C:/Users/Rivals16/Desktop/Testing/'
@@ -43,14 +52,17 @@ currentImagePath = directory + images[currentImage]
 
 im = Image.open(currentImagePath)
 resized_im = resizeImage(im)
-
 myImage = ImageTk.PhotoImage(resized_im)
-mainImageWindow = Label(root, image=myImage)
-mainImageWindow.grid(row=0, column=0, columnspan=2)
 
+mainImageWindow = Label(root, image=myImage)
 prevButton = Button(root, text='<<', command=lambda: prevImage(currentImage))
 nextButton = Button(root, text='>>', command=lambda: nextImage(currentImage))
-prevButton.grid(row=1, column=0)
-nextButton.grid(row=1, column=1)
+statusBar = Label(root, text='Image ' + '{}'.format(currentImage + 1) + ' of ' + str(len(images)), bd=3, anchor='ne',
+                  relief=SUNKEN)
+
+mainImageWindow.grid(row=0, column=0, columnspan=2, pady=10)
+prevButton.grid(row=1, column=0, pady=10)
+nextButton.grid(row=1, column=1, pady=10)
+statusBar.grid(row=2, sticky='we', columnspan=3)
 
 root.mainloop()
